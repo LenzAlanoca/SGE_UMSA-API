@@ -45,8 +45,10 @@ POST	/eventos	Crea un nuevo evento
 GET	/eventos/{id}	Muestra detalles de un evento
 PUT	/eventos/{id}	Edita un evento existente
 DELETE	/eventos/{id}	Borra un evento
-🤝 ¿Quieres colaborar?
-¡Claro que sí! Si tienes ideas o mejoras, haz un fork y manda un Pull Request. Toda contribución es bienvenida 🚀
+
+
+-DOCUMENTACION:
+  - DOCUMENTACION DE LA BASE DE DATOS : https://docs.google.com/document/d/1_YPHiT-qAIi2x4HH6Id93sW9QsO_XGNbUADiAVXpMUA/edit?tab=t.0
 
 📜 Licencia
 Este proyecto está bajo la MIT License. Úsalo, mejóralo y compártelo.
