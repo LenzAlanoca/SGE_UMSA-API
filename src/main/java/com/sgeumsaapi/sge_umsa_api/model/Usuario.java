@@ -1,4 +1,4 @@
-package com.sistemaGestionEventos.model;
+package com.sgeumsaapi.sge_umsa_api.model;
 
 import org.hibernate.validator.constraints.Length;
 
