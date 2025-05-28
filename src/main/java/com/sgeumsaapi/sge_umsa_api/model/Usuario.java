@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Length;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
@@ -28,7 +30,7 @@ public class Usuario {
     private Long ci;
     
     @Version
-    private long version;
+    private Long version;
     
     @Column(nullable = false,length = 50)
     @Basic(optional = false)
@@ -54,6 +56,7 @@ public class Usuario {
     private String usuario;
 
     @Column(nullable = false,length= 20)
+    @Enumerated(EnumType.STRING)
     @NotBlank(message = "El rol no puede estar vacio")
     private String rol;
     
