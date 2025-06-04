@@ -9,6 +9,14 @@ public class AsignadoId implements Serializable {
     private Long idSalon;
     private Long idEvento;
 
+
+
+
+    public AsignadoId(Long idSalon, Long idEvento) {
+        this.idSalon = idSalon;
+        this.idEvento = idEvento;
+    }
+
     // Getters y Setters
     public Long getIdSalon() {
         return idSalon;

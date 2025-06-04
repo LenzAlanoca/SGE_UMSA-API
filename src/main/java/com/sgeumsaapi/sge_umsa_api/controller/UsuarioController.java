@@ -5,6 +5,7 @@ import com.sgeumsaapi.sge_umsa_api.DTO.User.*;
 import com.sgeumsaapi.sge_umsa_api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@Validated
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
