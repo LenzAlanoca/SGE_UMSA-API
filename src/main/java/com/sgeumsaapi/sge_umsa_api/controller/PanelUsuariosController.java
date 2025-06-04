@@ -1,4 +1,4 @@
-package com.sgeumsaapi.sge_umsa_api.controllers;
+package com.sgeumsaapi.sge_umsa_api.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

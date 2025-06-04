@@ -1,34 +1,14 @@
-package com.sgeumsaapi.sge_umsa_api.model;
+package com.sgeumsaapi.sge_umsa_api.DTO.User;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "USUARIO")
-public class Usuario {
-    @Id
-    @Column(name = "ci", nullable = false, unique = true)
+public class UsuarioCreateDTO {
     private String ci;
-
-    @Column(name = "nombre", nullable = false)
     private String nombre;
-
-    @Column(name = "apellido", nullable = false)
     private String apellido;
-
-    @Column(name = "correo", nullable = false, unique = true)
     private String correo;
-
-    @Column(name = "rol", nullable = false)
     private String rol;
-
-    @Column(name = "telefono")
     private String telefono;
-
-    @Column(name = "usuario", nullable = false, unique = true)
     private String usuario;
+    private String password; // Solo para creación
 
     // Getters y Setters
     public String getCi() {
@@ -85,5 +65,13 @@ public class Usuario {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

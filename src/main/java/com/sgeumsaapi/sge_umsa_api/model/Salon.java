@@ -1,6 +1,5 @@
 package com.sgeumsaapi.sge_umsa_api.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,38 +8,66 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 @Entity
-@Table(name = "salon")
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-
+@Table(name = "SALON")
 public class Salon {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_salon;
-    
-    @Version
-    private Long version;
+    @Column(name = "id_salon")
+    private Long idSalon;
 
-    @Column (nullable = false,length = 100)
-    @NotBlank(message = "Debe agregar un nombre")
-    @Size(max=100, message = "El nombre no debe superar 100 caracteres")
-    private String nombre;
+    @Column(name = "nombre_salon", nullable = false)
+    private String nombreSalon;
 
-    @Min(value = 1,message = "La capacidad debe ser al menos 1")
+    @Column(name = "capacidad", nullable = false)
     private Integer capacidad;
-    
+
+    @Column(name = "tipo_salon", nullable = false)
+    private String tipoSalon;
+
     @ManyToOne
-    @JoinColumn(name = "id_predio",nullable = false)
+    @JoinColumn(name = "id_predio", referencedColumnName = "id_predio", nullable = false)
     private Predio predio;
+
+    // Getters y Setters
+    public Long getIdSalon() {
+        return idSalon;
+    }
+
+    public void setIdSalon(Long idSalon) {
+        this.idSalon = idSalon;
+    }
+
+    public String getNombreSalon() {
+        return nombreSalon;
+    }
+
+    public void setNombreSalon(String nombreSalon) {
+        this.nombreSalon = nombreSalon;
+    }
+
+    public Integer getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(Integer capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public String getTipoSalon() {
+        return tipoSalon;
+    }
+
+    public void setTipoSalon(String tipoSalon) {
+        this.tipoSalon = tipoSalon;
+    }
+
+    public Predio getPredio() {
+        return predio;
+    }
+
+    public void setPredio(Predio predio) {
+        this.predio = predio;
+    }
 }

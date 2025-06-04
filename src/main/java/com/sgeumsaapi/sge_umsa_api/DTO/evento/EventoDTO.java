@@ -1,45 +1,18 @@
-package com.sgeumsaapi.sge_umsa_api.model;
+package com.sgeumsaapi.sge_umsa_api.DTO.evento;
+
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "EVENTO")
-public class Evento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_evento")
+public class EventoDTO {
     private Long idEvento;
-
-    @Column(name = "titulo", nullable = false)
     private String titulo;
-
-    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
-
-    @Column(name = "estado", nullable = false)
     private String estado;
-
-    @Column(name = "tipo_evento", nullable = false)
     private String tipoEvento;
-
-    @Column(name = "fecha_inicio", nullable = false)
     private LocalDateTime fechaInicio;
-
-    @Column(name = "fecha_final", nullable = false)
     private LocalDateTime fechaFinal;
-
-    @ManyToOne
-    @JoinColumn(name = "ci_organizador", referencedColumnName = "ci", nullable = false)
-    private Usuario organizador;
+    private String organizadorCi;
+    private String organizadorNombre;
 
     // Getters y Setters
     public Long getIdEvento() {
@@ -98,11 +71,19 @@ public class Evento {
         this.fechaFinal = fechaFinal;
     }
 
-    public Usuario getOrganizador() {
-        return organizador;
+    public String getOrganizadorCi() {
+        return organizadorCi;
     }
 
-    public void setOrganizador(Usuario organizador) {
-        this.organizador = organizador;
+    public void setOrganizadorCi(String organizadorCi) {
+        this.organizadorCi = organizadorCi;
+    }
+
+    public String getOrganizadorNombre() {
+        return organizadorNombre;
+    }
+
+    public void setOrganizadorNombre(String organizadorNombre) {
+        this.organizadorNombre = organizadorNombre;
     }
 }
