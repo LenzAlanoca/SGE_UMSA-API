@@ -1,6 +1,11 @@
 package com.sgeumsaapi.sge_umsa_api.service.impl;
 
-import com.sgeumsaapi.sge_umsa_api.DTO.lugar.*;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.sgeumsaapi.sge_umsa_api.DTO.lugar.SalonDTO;
 import com.sgeumsaapi.sge_umsa_api.exception.ResourceNotFoundException;
 import com.sgeumsaapi.sge_umsa_api.mapper.SalonMapper;
 import com.sgeumsaapi.sge_umsa_api.model.Predio;
@@ -8,9 +13,6 @@ import com.sgeumsaapi.sge_umsa_api.model.Salon;
 import com.sgeumsaapi.sge_umsa_api.repository.PredioRepository;
 import com.sgeumsaapi.sge_umsa_api.repository.SalonRepository;
 import com.sgeumsaapi.sge_umsa_api.service.SalonService;
-import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SalonServiceImpl implements SalonService {
@@ -42,9 +44,10 @@ public class SalonServiceImpl implements SalonService {
         return salonMapper.toDto(salon);
     }
 
+
     @Override
     public List<SalonDTO> findByPredio(Long predioId) {
-        return salonRepository.findByPredioId(predioId)
+        return salonRepository.findByPredio_IdPredio(predioId)
                 .stream()
                 .map(salonMapper::toDto)
                 .collect(Collectors.toList());
