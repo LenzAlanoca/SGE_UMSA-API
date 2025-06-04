@@ -16,6 +16,11 @@ public class AsignadoId implements Serializable {
         this.idSalon = idSalon;
         this.idEvento = idEvento;
     }
+    
+
+    public AsignadoId() {
+    }
+
 
     // Getters y Setters
     public Long getIdSalon() {

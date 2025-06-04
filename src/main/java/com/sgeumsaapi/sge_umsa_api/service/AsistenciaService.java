@@ -1,8 +1,9 @@
 package com.sgeumsaapi.sge_umsa_api.service;
 
-import com.sgeumsaapi.sge_umsa_api.DTO.asistencia.*;
-import com.sgeumsaapi.sge_umsa_api.dto.attendance.AsistenciaCreateDTO;
 import java.util.List;
+
+import com.sgeumsaapi.sge_umsa_api.DTO.asistencia.AsistenciaCreateDTO;
+import com.sgeumsaapi.sge_umsa_api.DTO.asistencia.AsistenciaDTO;
 
 public interface AsistenciaService {
     List<AsistenciaDTO> findAll();

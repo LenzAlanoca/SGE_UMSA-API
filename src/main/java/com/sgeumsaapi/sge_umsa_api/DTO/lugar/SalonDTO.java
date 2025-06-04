@@ -1,13 +1,27 @@
 package com.sgeumsaapi.sge_umsa_api.DTO.lugar;
 
-
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class SalonDTO {
+    
+
     private Long idSalon;
+
+    @NotBlank(message = "El nombre del salón es obligatorio")
     private String nombreSalon;
+
+    @NotNull(message = "La capacidad es obligatoria")
+    @Min(value = 1, message = "La capacidad debe ser al menos 1")
     private Integer capacidad;
+
+    @NotBlank(message = "El tipo de salón es obligatorio")
     private String tipoSalon;
+
+    @NotNull(message = "El ID del predio es obligatorio")
     private Long idPredio;
+
     private String nombrePredio;
 
     // Getters y Setters

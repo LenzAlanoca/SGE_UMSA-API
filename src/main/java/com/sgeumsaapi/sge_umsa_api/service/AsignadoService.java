@@ -1,15 +1,15 @@
 package com.sgeumsaapi.sge_umsa_api.service;
 
-import com.sgeumsaapi.sge_umsa_api.DTO.asignacion.*;
-
 import java.util.List;
+
+import com.sgeumsaapi.sge_umsa_api.DTO.asignacion.AsignadoCreateDTO;
+import com.sgeumsaapi.sge_umsa_api.DTO.asignacion.AsignadoDTO;
 
 public interface AsignadoService {
     List<AsignadoDTO> findAll();
-    AsignadoDTO findById(Long idSalon, Long idEvento);
-    AsignadoDTO createAsignado(AsignadoCreateDTO asignadoCreateDTO);
-    AsignadoDTO updateAsignado(Long idSalon, Long idEvento, AsignadoCreateDTO asignadoCreateDTO);
-    void deleteAsignado(Long idSalon, Long idEvento);
-    List<AsignadoDTO> findByEventoId(Long idEvento);
-    List<AsignadoDTO> findBySalonId(Long idSalon);
+    List<AsignadoDTO> findByEvento(Long eventoId);
+    List<AsignadoDTO> findBySalon(Long salonId);
+    AsignadoDTO createAsignacion(AsignadoCreateDTO asignadoCreateDTO);
+    AsignadoDTO updateAsignacion(Long eventoId, Long salonId, AsignadoCreateDTO asignadoCreateDTO);
+    void deleteAsignacion(Long eventoId, Long salonId);
 }

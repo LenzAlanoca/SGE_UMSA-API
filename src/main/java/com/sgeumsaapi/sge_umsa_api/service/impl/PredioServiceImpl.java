@@ -1,6 +1,6 @@
 package com.sgeumsaapi.sge_umsa_api.service.impl;
 
-import com.sgeumsaapi.sge_umsa_api.DTO.lugar.PredioDTO;
+import com.sgeumsaapi.sge_umsa_api.DTO.lugar.*;
 import com.sgeumsaapi.sge_umsa_api.exception.ResourceNotFoundException;
 import com.sgeumsaapi.sge_umsa_api.mapper.PredioMapper;
 import com.sgeumsaapi.sge_umsa_api.model.Predio;
@@ -30,39 +30,34 @@ public class PredioServiceImpl implements PredioService {
     }
 
     @Override
-    public PredioDTO findById(Long idPredio) {
-        Predio predio = predioRepository.findById(idPredio)
-                .orElseThrow(() -> new ResourceNotFoundException("Predio no encontrado con ID: " + idPredio));
+    public PredioDTO findById(Long id) {
+        Predio predio = predioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Predio no encontrado con ID: " + id));
         return predioMapper.toDto(predio);
     }
 
     @Override
     public PredioDTO createPredio(PredioDTO predioDTO) {
         Predio predio = predioMapper.toEntity(predioDTO);
-        // Asegurarse de no establecer ID para creación
-        predio.setIdPredio(null);
         Predio savedPredio = predioRepository.save(predio);
         return predioMapper.toDto(savedPredio);
     }
 
     @Override
-    public PredioDTO updatePredio(Long idPredio, PredioDTO predioDTO) {
-        Predio predio = predioRepository.findById(idPredio)
-                .orElseThrow(() -> new ResourceNotFoundException("Predio no encontrado con ID: " + idPredio));
+    public PredioDTO updatePredio(Long id, PredioDTO predioDTO) {
+        Predio predio = predioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Predio no encontrado con ID: " + id));
         
-        // Actualizar campos
-        predio.setNombrePredio(predioDTO.getNombrePredio());
-        predio.setUbicacion(predioDTO.getUbicacion());
-        
+        predioMapper.updateFromDto(predioDTO, predio);
         Predio updatedPredio = predioRepository.save(predio);
         return predioMapper.toDto(updatedPredio);
     }
 
     @Override
-    public void deletePredio(Long idPredio) {
-        if (!predioRepository.existsById(idPredio)) {
-            throw new ResourceNotFoundException("Predio no encontrado con ID: " + idPredio);
+    public void deletePredio(Long id) {
+        if (!predioRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Predio no encontrado con ID: " + id);
         }
-        predioRepository.deleteById(idPredio);
+        predioRepository.deleteById(id);
     }
 }
