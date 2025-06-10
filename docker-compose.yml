@@ -1,0 +1,35 @@
+services:
+  app:
+    build: .
+    container_name: sge_umsa_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/segumsa-db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 78753307
+    networks:
+      - sge_network
+
+  db:
+    image: postgres:15
+    container_name: sge_umsa_db
+    restart: always
+    environment:
+      POSTGRES_DB: segumsa-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 78753307
+    ports:
+      - "5433:5433"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sge_network
+
+volumes:
+  postgres_data:
+
+networks:
+  sge_network:
