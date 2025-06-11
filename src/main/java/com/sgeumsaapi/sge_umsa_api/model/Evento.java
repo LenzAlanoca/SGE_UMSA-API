@@ -25,18 +25,25 @@ public class Evento {
     @Column(name = "id_evento")
     private Long idEvento;
 
-    @NotBlank(message = "El título es obligatorio")
-    @Size(min = 3, max = 100, message = "El título debe tener entre 3 y 100 caracteres")
+    // Validaciones mejoradas para título
+    @NotBlank(message = "El título es obligatorio y no puede estar vacío")
+    @Size(min = 5, max = 100, message = "El título debe tener entre 5 y 100 caracteres")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\s\\-.,;:()]+$",
+            message = "El título solo puede contener letras, números, espacios y signos de puntuación básicos")
     @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
 
-    @Size(max = 1000, message = "La descripción no puede exceder los 1000 caracteres")
+    // Validaciones mejoradas para descripción
+    @Size(min = 10, max = 1000, message = "La descripción debe tener entre 10 y 1000 caracteres")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\s\\-.,;:()\n\r]+$",
+            message = "La descripción contiene caracteres no válidos")
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
+    // Validaciones mejoradas para estado
     @NotBlank(message = "El estado es obligatorio")
-    @Pattern(regexp = "^(ACTIVO|INACTIVO|CANCELADO|FINALIZADO)$",
-            message = "El estado debe ser: ACTIVO, INACTIVO, CANCELADO o FINALIZADO")
+    @Pattern(regexp = "^(ACTIVO|INACTIVO|CANCELADO|FINALIZADO|PROGRAMADO)$",
+            message = "El estado debe ser uno de los siguientes: ACTIVO, INACTIVO, CANCELADO, FINALIZADO o PROGRAMADO")
     @Column(name = "estado", nullable = false, length = 20)
     private String estado;
 
@@ -67,6 +74,44 @@ public class Evento {
             return true; // Se validará por @NotNull
         }
         return fechaFinal.isAfter(fechaInicio);
+    }
+
+    // Validación personalizada para el título (sin palabras ofensivas básicas)
+    @jakarta.validation.constraints.AssertTrue(message = "El título contiene palabras no apropiadas")
+    public boolean isTituloApropiado() {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            return true; // Se validará por @NotBlank
+        }
+        String tituloLower = titulo.toLowerCase().trim();
+        String[] palabrasProhibidas = {"test", "prueba", "xxx", "temporal"};
+
+        for (String palabra : palabrasProhibidas) {
+            if (tituloLower.contains(palabra)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Validación personalizada para la descripción
+    @jakarta.validation.constraints.AssertTrue(message = "La descripción debe tener contenido significativo")
+    public boolean isDescripcionSignificativa() {
+        if (descripcion == null || descripcion.trim().isEmpty()) {
+            return true; // Descripción opcional, pero si existe debe ser significativa
+        }
+
+        String desc = descripcion.trim();
+        // Validar que no sea solo espacios o caracteres repetidos
+        if (desc.length() < 10) {
+            return false;
+        }
+
+        // Validar que no sean solo caracteres repetidos (ej: "aaaaaaaaaa")
+        if (desc.chars().distinct().count() < 3) {
+            return false;
+        }
+
+        return true;
     }
 
     // Getters y Setters
